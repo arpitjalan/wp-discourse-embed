@@ -29,11 +29,9 @@ class DiscourseEmbed {
   }
 
   function discourse_embed_js() {
-    // echo "sds"; exit;
     global $post;
     $discourse_embed_options = self::get_plugin_options();
-    $discourse_embed_url = $discourse_embed_options['url'];
-    // echo $discourse_embed_url; exit;
+    $discourse_embed_url = $discourse_embed_options['url'] . "/";
   ?>
     <script>
       var discourseUrl = '<?php echo $discourse_embed_url; ?>',

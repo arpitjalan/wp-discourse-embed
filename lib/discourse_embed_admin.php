@@ -25,6 +25,10 @@ class DiscourseEmbedAdmin {
     add_settings_field( 'embed_after_date_input', 'Embed blog posts created after date (optional)', array( $this, 'embed_after_date_input' ), 'discourse_embed', 'discourse_embed_api' );
   }
 
+  function init_default_settings() {
+
+  }
+
   function url_input() {
     self::text_input( 'url', '' );
   }
