@@ -21,8 +21,8 @@ class DiscourseEmbedAdmin {
     register_setting( 'discourse_embed', 'discourse_embed', array( $this, 'discourse_validate_options' ) );
     add_settings_section( 'discourse_embed_api', 'Common Settings', array( $this, 'init_default_settings' ), 'discourse_embed' );
 
-    add_settings_field( 'discourse_url', 'Discourse URL', array( $this, 'url_input' ), 'discourse_embed', 'discourse_embed_api' );
-    add_settings_field( 'embed_after_date_input', 'Embed blog posts created after date (optional)', array( $this, 'embed_after_date_input' ), 'discourse_embed', 'discourse_embed_api' );
+    add_settings_field( 'discourse_url', 'Discourse URL (required)', array( $this, 'url_input' ), 'discourse_embed', 'discourse_embed_api' );
+    add_settings_field( 'embed_after_date_input', 'Embed Discourse comments on posts published after date (optional)', array( $this, 'embed_after_date_input' ), 'discourse_embed', 'discourse_embed_api' );
   }
 
   function init_default_settings() {
@@ -30,7 +30,7 @@ class DiscourseEmbedAdmin {
   }
 
   function url_input() {
-    self::text_input( 'url', '' );
+    self::text_input( 'url', 'Example URL: http://discourse.example.com' );
   }
 
   function embed_after_date_input() {

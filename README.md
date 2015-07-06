@@ -2,6 +2,8 @@
 
 This WordPress plugin allows you to **use Discourse as a community engine for your WordPress blog**.
 
+[Discourse Meta topic](https://meta.discourse.org/t/wp-discourse-embed-plugin/30814?u=techapj) about it.
+
 ## Installation
 
 ### Plugin manager from your `wp-admin`
