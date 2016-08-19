@@ -33,12 +33,12 @@ class DiscourseEmbed {
     $discourse_embed_options = self::get_plugin_options();
     $discourse_embed_url = $discourse_embed_options['url'] . "/";
   ?>
-    <script>
-      var discourseUrl = '<?php echo $discourse_embed_url; ?>',
-          discourseEmbedUrl = '<?php echo get_permalink( $post->ID ); ?>';
+    <script type="text/javascript">
+      DiscourseEmbed = { discourseUrl: '<?php echo $discourse_embed_url; ?>',
+                         discourseEmbedUrl: '<?php echo get_permalink( $post->ID ); ?>' };
       (function() {
         var d = document.createElement('script'); d.type = 'text/javascript'; d.async = true;
-          d.src = discourseUrl + 'javascripts/embed.js';
+        d.src = DiscourseEmbed.discourseUrl + 'javascripts/embed.js';
         (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(d);
       })();
     </script>
