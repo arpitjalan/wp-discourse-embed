@@ -32,18 +32,27 @@ class DiscourseEmbed {
     global $post;
     $discourse_embed_options = self::get_plugin_options();
     $discourse_embed_url = $discourse_embed_options['url'] . "/";
-  ?>
-    <script type="text/javascript">
-      DiscourseEmbed = { discourseUrl: '<?php echo $discourse_embed_url; ?>',
-                         discourseEmbedUrl: '<?php echo get_permalink( $post->ID ); ?>' };
-      (function() {
-        var d = document.createElement('script'); d.type = 'text/javascript'; d.async = true;
-        d.src = DiscourseEmbed.discourseUrl + 'javascripts/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(d);
-      })();
-    </script>
-  <?php
-  }
+    if (is_front_page()) { ?>
+      <script type="text/javascript">
+        var discourseUrl = '<?php echo $discourse_embed_url; ?>';
+        (function() {
+          var d = document.createElement('script'); d.type = 'text/javascript'; d.async = true;
+          d.src = discourseUrl + 'javascripts/count.js';
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(d);
+        })();
+      </script>
+    <?php } else { ?>
+      <script type="text/javascript">
+        DiscourseEmbed = { discourseUrl: '<?php echo $discourse_embed_url; ?>',
+                           discourseEmbedUrl: '<?php echo get_permalink( $post->ID ); ?>' };
+        (function() {
+          var d = document.createElement('script'); d.type = 'text/javascript'; d.async = true;
+          d.src = DiscourseEmbed.discourseUrl + 'javascripts/embed.js';
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(d);
+        })();
+      </script>
+    <?php
+  }}
 
   static function get_plugin_options() {
     return wp_parse_args( get_option( 'discourse_embed' ), DiscourseEmbed::$options );
