@@ -16,6 +16,7 @@ class DiscourseEmbed {
   public function __construct() {
     add_action( 'init', array( $this, 'init' ) );
     add_action( 'wp_footer', array( $this, 'discourse_embed_js' ), 100 );
+    add_action( 'wp_enqueue_scripts', array( $this, 'add_author_meta' ) );
   }
 
   static function install() {
@@ -26,6 +27,14 @@ class DiscourseEmbed {
   public function init() {
     // replace comments with discourse comments
     add_filter( 'comments_template', array( $this, 'comments_template' ) );
+  }
+
+  function add_author_meta() {
+    if (is_single()) {
+      global $post;
+      $author = get_the_author_meta('nickname', $post->post_author);
+      echo "<meta name=\"author\" content=\"$author\">";
+    }
   }
 
   function discourse_embed_js() {
